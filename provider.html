@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="컬처핏(CultureFit) 주최측 콘솔 — 전시·공연 주최측(관리자) 전용" />
+  <title>주최측 · 컬처핏 (CultureFit)</title>
+
+  <!-- 검색엔진/소비자 노출 방지 -->
+  <meta name="robots" content="noindex, nofollow" />
+
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+  <link rel="stylesheet" as="style" crossorigin
+    href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
+  <link rel="stylesheet" href="styles.css" />
+
+  <!--
+    ============================================================
+    주최측 콘솔 (provider.html)
+    · 소비자 화면(index.html)과 분리된 별도 페이지.
+    · 로그인 후에만 콘솔(#provider-console)이 노출됩니다.
+    · MVP 데모 인증(클라이언트) — 실제 운영 시 서버 인증 +
+      비밀번호 해시 저장 필요(PRD 4.2).
+    ============================================================
+  -->
+</head>
+
+<body>
+  <a class="skip-link" href="#provider-main">본문 바로가기</a>
+
+  <header id="site-header">
+    <div class="container bar">
+      <a id="brand-logo" href="index.html" aria-label="CultureFit home">
+        <strong>CultureFit</strong>
+      </a>
+
+      <nav id="primary-nav" aria-label="주 메뉴">
+        <ul>
+          <li><a href="index.html" data-i18n="backConsumer">소비자 화면으로</a></li>
+        </ul>
+      </nav>
+
+      <div id="language-selector" role="group" aria-label="언어 선택">
+        <button type="button" data-lang="ko" aria-pressed="true">한국어</button>
+        <button type="button" data-lang="en" aria-pressed="false">EN</button>
+        <button type="button" data-lang="zh" aria-pressed="false">中文</button>
+        <button type="button" data-lang="ja" aria-pressed="false">日本語</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="provider-main" class="container">
+
+    <!-- ---------- 로그인 뷰 ---------- -->
+    <section id="auth-view" class="auth-wrap">
+      <div class="auth-card">
+        <h1 data-i18n="loginTitle">주최측 로그인</h1>
+        <p class="note" data-i18n="loginSubtitle">전시·공연 주최측(관리자) 전용 페이지입니다.</p>
+
+        <form id="login-form" class="auth-form">
+          <label class="auth-field">
+            <span data-i18n="loginId">아이디</span>
+            <input type="text" id="login-id" autocomplete="username" required />
+          </label>
+          <label class="auth-field">
+            <span data-i18n="loginPw">비밀번호</span>
+            <input type="password" id="login-pw" autocomplete="current-password" required />
+          </label>
+          <p class="auth-error" id="login-error" role="alert" hidden></p>
+          <button type="submit" class="btn-inverted auth-submit" data-i18n="loginBtn">로그인</button>
+        </form>
+
+        <p class="auth-hint" data-i18n="loginHint">데모 계정 — 아이디: admin / 비밀번호: culturefit</p>
+      </div>
+    </section>
+
+    <!-- ---------- 콘솔 뷰 (로그인 후) ---------- -->
+    <div id="console-view" hidden>
+      <div class="console-head">
+        <h1 data-i18n="consoleTitle">주최측 콘솔</h1>
+        <button type="button" class="btn-ghost" id="logout-btn" data-i18n="logout">로그아웃</button>
+      </div>
+
+      <div id="provider-console">
+
+        <!-- 콘텐츠 등록 -->
+        <section id="content-registration">
+          <h2 data-i18n="regTitle">콘텐츠 등록</h2>
+          <p class="note" data-i18n="regNote">전시·공연 신규 등록. 등록 시 한국어 원문 → 자동번역 → AI 검수 → 4개 언어 노출.</p>
+
+          <form class="reg-form" id="reg-form">
+            <label class="reg-field">
+              <span data-i18n="regFieldTitle">제목 (한국어)</span>
+              <input type="text" placeholder="예) 방혜자: 빛의 그림" />
+            </label>
+            <label class="reg-field">
+              <span data-i18n="regFieldGenre">장르</span>
+              <select>
+                <option data-i18n="optExhibition">전시</option>
+                <option data-i18n="optPerformance">공연</option>
+                <option data-i18n="optPopup">팝업·체험</option>
+              </select>
+            </label>
+            <label class="reg-field reg-field--wide">
+              <span data-i18n="regFieldDesc">소개 (한국어 원문)</span>
+              <textarea rows="3" placeholder="전시·공연 소개를 입력하세요."></textarea>
+            </label>
+            <label class="reg-field">
+              <span data-i18n="regFieldPeriod">기간</span>
+              <input type="text" placeholder="2026.06.10 – 08.31" />
+            </label>
+            <label class="reg-field">
+              <span data-i18n="regFieldVenue">장소</span>
+              <input type="text" placeholder="서울 종로 · OO미술관" />
+            </label>
+            <label class="reg-field">
+              <span data-i18n="regFieldPrice">관람료</span>
+              <input type="text" placeholder="15,000원 / 무료" />
+            </label>
+            <label class="reg-field">
+              <span data-i18n="regFieldTags">취향 태그</span>
+              <input type="text" placeholder="추상 회화, 회고전" />
+            </label>
+            <div class="reg-actions">
+              <button type="submit" class="btn-inverted" data-i18n="regSubmit">등록 후 번역 요청</button>
+              <button type="button" class="btn-ghost" data-i18n="regDraft">임시 저장</button>
+            </div>
+          </form>
+        </section>
+
+        <!-- 기능3: 리뷰 관리 -->
+        <section id="review-management">
+          <h2 data-i18n="revMgmtTitle">리뷰 · 피드백 관리</h2>
+          <p class="note" data-i18n="revMgmtNote">담당 전시의 리뷰·평점 확인 및 답글 작성. 신규 리뷰 실시간 반영.</p>
+
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th data-i18n="thAuthor">작성자</th>
+                <th data-i18n="thRating">평점</th>
+                <th data-i18n="thContent">내용</th>
+                <th data-i18n="thStatus">상태</th>
+              </tr>
+            </thead>
+            <tbody id="admin-review-body"></tbody>
+          </table>
+        </section>
+
+        <!-- 기능5: 데이터 대시보드 -->
+        <section id="analytics-dashboard">
+          <h2 data-i18n="analyticsTitle">데이터 대시보드</h2>
+          <p class="note" data-i18n="analyticsNote">조회수, 관심 등록 수, 리뷰·평점 통계.</p>
+          <div class="grid grid-3">
+            <div class="stat-card">
+              <span class="stat-label" data-i18n="statViews">주간 조회수</span>
+              <span class="stat-value">12,480</span>
+              <span class="stat-delta" data-i18n="statViewsDelta">+18% 전주 대비</span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-label" data-i18n="statInterest">관심 등록</span>
+              <span class="stat-value">2,137</span>
+              <span class="stat-delta" data-i18n="statInterestDelta">+9% 전주 대비</span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-label" data-i18n="statRating">평균 평점</span>
+              <span class="stat-value">4.7</span>
+              <span class="stat-delta" id="stat-rating-count"></span>
+            </div>
+          </div>
+        </section>
+
+        <!-- 기능7: 타겟 광고 -->
+        <section id="ad-management">
+          <h2 data-i18n="adTitle">타겟 광고 · 노출 관리</h2>
+          <p class="note" data-i18n="adNote">관심사·연령대 등 타겟 설정으로 특정 사용자군에게 우선 노출.</p>
+          <div class="ad-panel">
+            <div class="ad-targets" aria-label="선택된 타겟 조건">
+              <span class="chip chip--on" data-i18n="adAge">20–30대</span>
+              <span class="chip chip--on" data-i18n="adInterest">추상 회화 관심</span>
+              <span class="chip chip--on" data-i18n="adRegion">서울·수도권</span>
+              <button type="button" class="chip" data-i18n="adAddCond">+ 조건 추가</button>
+            </div>
+            <div class="ad-meta">
+              <span><span data-i18n="adReach">예상 도달</span> <strong data-i18n="adReachValue">약 8,400명</strong></span>
+              <button type="button" class="btn-inverted" data-i18n="adStart">노출 시작</button>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+
+  </main>
+
+  <footer id="site-footer">
+    <div class="container">
+      <p data-i18n="footer">© 2026 컬처핏 (CultureFit). MVP 프로토타입.</p>
+    </div>
+  </footer>
+
+  <script src="data.js"></script>
+  <script src="provider.js"></script>
+</body>
+</html>

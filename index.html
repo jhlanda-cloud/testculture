@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="컬처핏(CultureFit) — 취향 기반 개인화 추천으로 전시·공연을 찾는 문화생활 매칭 웹 서비스" />
+  <title>컬처핏 (CultureFit)</title>
+
+  <!-- 폰트: Pretendard Variable (29CM 디자인 시스템 지정 폰트) -->
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+  <link
+    rel="stylesheet"
+    as="style"
+    crossorigin
+    href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css"
+  />
+
+  <!-- 스타일시트: 29CM 디자인 적용 (styles.css) -->
+  <link rel="stylesheet" href="styles.css" />
+
+  <!--
+    ============================================================
+    컬처핏 (CultureFit)
+    ------------------------------------------------------------
+    · 데이터 계층: data.js (이벤트 + 4개 언어 i18n 사전, 단일 소스)
+    · 로직 계층:   app.js (렌더링 + 상호작용)
+    · 표현 계층:   styles.css (29CM 디자인 시스템)
+
+    [PRD 기능 ↔ 섹션/구현 매핑]
+      기능1  개인화 추천        → #personalized-recommendations (취향 태그 기반)
+      기능2  통합 검색/필터     → #search-filter (지역·날짜·장르·가격·텍스트)
+      기능3  리뷰·피드백 관리   → #reviews (소비자) / #review-management (주최측)
+      기능4  구매/결제 연동     → #purchase-link (외부 예매 링크)
+      기능5  주최측 데이터 대시보드 → #analytics-dashboard
+      기능6  글로벌 트렌드 리포트 → #trend-report
+      기능7  타겟 광고/노출 관리 → #ad-management
+      기능8  다국어(한/영/중/일) → #language-selector + data-i18n + 번역 상태(#translation-status)
+      기능9  동선 기반 주변 추천 → #nearby-recommendations
+      기능10 지도 기반 위치 안내 → #location-map (OpenStreetMap 임베드)
+      기능11 SNS 바로가기        → #sns-links
+    ============================================================
+  -->
+</head>
+
+<body>
+  <!-- 접근성: 본문 바로가기 -->
+  <a class="skip-link" href="#main-content">본문 바로가기</a>
+
+  <!-- ============================================================
+       공통 헤더
+       ============================================================ -->
+  <header id="site-header">
+    <div class="container bar">
+      <a id="brand-logo" href="#main-content" aria-label="CultureFit home">
+        <strong>CultureFit</strong>
+      </a>
+
+      <nav id="primary-nav" aria-label="주 메뉴">
+        <ul>
+          <li><a href="#personalized-recommendations" data-i18n="navRecommend">추천</a></li>
+          <li><a href="#search-filter" data-i18n="navExplore">탐색</a></li>
+          <li><a href="#trend-report" data-i18n="navTrend">트렌드</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-right">
+        <!-- 소비자 로그인/마이페이지 (방문·예매·장바구니 기록) -->
+        <button type="button" class="header-btn icon-btn" id="account-btn" aria-label="로그인"></button>
+        <!-- 장바구니 (바로 예매하지 않는 경우) -->
+        <button type="button" class="header-btn icon-btn" id="cart-btn" aria-label="장바구니">
+          <span class="cart-count" id="cart-count" hidden>0</span>
+        </button>
+        <!-- 배경음악 토글 (기본 재생, 소비자가 끌 수 있음) -->
+        <button type="button" class="header-btn icon-btn" id="music-toggle" aria-pressed="true">음악 끄기</button>
+        <!-- 주최측: 언어 선택 옆 별도 버튼 → 별도 로그인 페이지(provider.html) -->
+        <a class="header-btn" href="provider.html" data-i18n="navProvider">주최측</a>
+        <!-- 기능8: 언어 선택기 -->
+        <div id="language-selector" role="group" aria-label="언어 선택">
+          <button type="button" data-lang="ko" aria-pressed="true">한국어</button>
+          <button type="button" data-lang="en" aria-pressed="false">EN</button>
+          <button type="button" data-lang="zh" aria-pressed="false">中文</button>
+          <button type="button" data-lang="ja" aria-pressed="false">日本語</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content" class="container">
+
+    <!-- ============================================================
+         B. 소비자 화면
+         ============================================================ -->
+    <div id="consumer-app">
+
+      <!-- 히어로 + 검색 진입 -->
+      <section id="hero-search">
+        <h1 data-i18n-html="heroTitle">취향에 맞는 전시·공연을<br />한 곳에서</h1>
+        <p class="note" data-i18n="heroNote">관심 카테고리·지역·취향 태그를 설정하면 나에게 맞는 콘텐츠를 추천합니다.</p>
+
+        <!-- 통합 검색 바 (기능2) -->
+        <form class="search-bar" role="search" onsubmit="return false;">
+          <input type="search" id="global-search" name="q" data-i18n-ph="searchPlaceholder"
+            placeholder="전시, 공연, 아티스트, 장소를 검색하세요" aria-label="통합 검색" />
+          <button type="submit" class="btn-inverted" data-i18n="searchBtn">검색</button>
+        </form>
+
+        <!-- 취향 태그 (기능1 입력) -->
+        <div class="taste-tags" id="taste-tags" aria-label="관심 취향 태그">
+          <span class="taste-tags__label" data-i18n="tasteLabel">관심 취향</span>
+          <button type="button" class="chip chip--on" data-tag="abstract" data-i18n="tasteAbstract">추상 회화</button>
+          <button type="button" class="chip" data-tag="sculpture" data-i18n="tasteSculpture">조각·설치</button>
+          <button type="button" class="chip" data-tag="popup" data-i18n="tastePopup">팝업·체험</button>
+          <button type="button" class="chip" data-tag="music" data-i18n="tasteMusic">음악·파티</button>
+          <button type="button" class="chip" data-tag="photo" data-i18n="tastePhoto">사진</button>
+        </div>
+
+        <!-- 대표 피처 캐러셀 (자동 5초 슬라이드 + 좌우 화살표) -->
+        <h2 class="hero-pick-title" data-i18n="heroEyebrow">이 주의 컬처핏 픽</h2>
+        <div class="hero-carousel" id="hero-carousel" aria-roledescription="carousel" aria-label="추천 전시·공연">
+          <div class="hero-carousel__viewport">
+            <div class="hero-carousel__track" id="hero-track"><!-- 이미지 슬라이드: app.js 렌더 --></div>
+            <button type="button" class="hero-carousel__arrow hero-carousel__arrow--prev" id="hero-prev" aria-label="이전 슬라이드">
+              <span aria-hidden="true">&#8249;</span>
+            </button>
+            <button type="button" class="hero-carousel__arrow hero-carousel__arrow--next" id="hero-next" aria-label="다음 슬라이드">
+              <span aria-hidden="true">&#8250;</span>
+            </button>
+          </div>
+          <div class="hero-caption" id="hero-caption"><!-- 활성 슬라이드 정보: app.js 렌더 --></div>
+          <div class="hero-carousel__dots" id="hero-dots" role="tablist" aria-label="슬라이드 선택"></div>
+        </div>
+      </section>
+
+      <!-- 기능2: 통합 검색/필터 -->
+      <section id="search-filter">
+        <h2 data-i18n="filterTitle">통합 검색 / 필터</h2>
+        <p class="note" data-i18n="filterNote">지역, 날짜, 장르, 가격대 등 조건을 한 번에 필터링.</p>
+
+        <div class="filter-bar" role="group" aria-label="검색 필터">
+          <label class="filter-field">
+            <span data-i18n="filterRegion">지역</span>
+            <select id="f-region">
+              <option value="all" data-i18n="optAll">전체</option>
+              <option value="seoul" data-i18n="optSeoul">서울</option>
+              <option value="gyeonggi" data-i18n="optGyeonggi">경기·인천</option>
+              <option value="busan" data-i18n="optBusan">부산</option>
+              <option value="daegu" data-i18n="optDaegu">대구·경북</option>
+            </select>
+          </label>
+          <label class="filter-field">
+            <span data-i18n="filterDate">날짜</span>
+            <select id="f-date">
+              <option value="all" data-i18n="optAll">전체</option>
+              <option value="today" data-i18n="optToday">오늘</option>
+              <option value="weekend" data-i18n="optWeekend">이번 주말</option>
+              <option value="month" data-i18n="optMonth">이번 달</option>
+            </select>
+          </label>
+          <label class="filter-field">
+            <span data-i18n="filterGenre">장르</span>
+            <select id="f-genre">
+              <option value="all" data-i18n="optAll">전체</option>
+              <option value="exhibition" data-i18n="optExhibition">전시</option>
+              <option value="performance" data-i18n="optPerformance">공연</option>
+              <option value="popup" data-i18n="optPopup">팝업·체험</option>
+            </select>
+          </label>
+          <label class="filter-field">
+            <span data-i18n="filterPrice">가격</span>
+            <select id="f-price">
+              <option value="all" data-i18n="optAll">전체</option>
+              <option value="free" data-i18n="optFree">무료</option>
+              <option value="under1" data-i18n="optUnder1">~1만원</option>
+              <option value="1to3" data-i18n="opt1to3">1~3만원</option>
+              <option value="over3" data-i18n="optOver3">3만원~</option>
+            </select>
+          </label>
+          <button type="button" class="btn-ghost filter-apply" id="filter-apply" data-i18n="filterApply">필터 적용</button>
+        </div>
+
+        <p class="filter-result-count" id="filter-result-count"></p>
+      </section>
+
+      <!-- 기능1: 개인화 추천 -->
+      <section id="personalized-recommendations">
+        <h2 data-i18n="recTitle">지윤님을 위한 추천</h2>
+        <p class="note" data-i18n="recNote">선택한 취향 태그를 바탕으로 비슷한 결의 콘텐츠를 골랐어요.</p>
+        <div class="grid grid-3" id="rec-list"></div>
+      </section>
+
+      <!-- 전체 콘텐츠 목록 -->
+      <section id="event-list">
+        <h2 data-i18n="listTitle">전시·공연 목록</h2>
+        <div class="grid grid-3" id="event-card-list"></div>
+      </section>
+
+      <!-- 콘텐츠 상세 -->
+      <section id="event-detail">
+        <!-- 소개 + 예매(인라인)·장바구니·관심 (기능4는 detail-head 안에서 렌더) -->
+        <div class="detail-head" id="detail-head"></div>
+
+        <!-- 기능3: 리뷰 — 예매 전에 참고하도록 소개 바로 아래 배치 -->
+        <aside id="reviews">
+          <h3 data-i18n="reviewsTitle">관람 후기 · 평점</h3>
+          <div class="review-summary" id="review-summary"></div>
+          <ul class="review-list" id="review-list"></ul>
+          <button type="button" class="btn-ghost" data-i18n="writeReview">후기 작성하기</button>
+        </aside>
+
+        <!-- 기능9: 동선 기반 주변 추천 — 평점(리뷰) 아래 배치 -->
+        <aside id="nearby-recommendations">
+          <h3 data-i18n="nearbyTitle">관람 후 이 동선은 어때요?</h3>
+          <p class="note" data-i18n="nearbyNote">장소 기준 도보 동선에 맞춰, 카페 선호 취향을 반영해 골랐어요.</p>
+          <div class="grid grid-3" id="nearby-list"></div>
+        </aside>
+
+        <!-- 기능10: 지도 -->
+        <aside id="location-map">
+          <h3 data-i18n="mapTitle">위치 · 길찾기</h3>
+          <p class="note" data-i18n="mapNote">전시장·공연장 위치와 현재 위치 기준 경로를 안내합니다.</p>
+          <div class="map-frame" id="map-frame"></div>
+        </aside>
+
+        <!-- 기능8: 번역 검수 상태 -->
+        <aside id="translation-status">
+          <h3 data-i18n="transTitle">번역 상태</h3>
+          <p class="note" data-i18n="transNote">자동번역 + AI 검수 통과 시 4개 언어 노출. 기준 미달 시 한국어 원문이 대체 노출됩니다.</p>
+          <ul class="lang-status" id="lang-status"></ul>
+        </aside>
+      </section>
+    </div>
+
+    <!-- ============================================================
+         공급자·주최측 콘솔은 소비자에게 노출하지 않음.
+         별도 페이지(provider.html, 로그인 필요)로 분리했습니다.
+         상단 내비게이션 '주최측' 링크 → provider.html
+         ============================================================ -->
+
+    <!-- ============================================================
+         D. 기능6: 글로벌 트렌드 리포트
+         ============================================================ -->
+    <section id="trend-report">
+      <h2 data-i18n="trendTitle">글로벌 문화·예술 트렌드 리포트</h2>
+      <p class="note" data-i18n="trendNote">전 세계 문화·예술·체험 마케팅 트렌드 정리 콘텐츠 정기 제공.</p>
+      <div class="grid grid-2" id="trend-list"></div>
+    </section>
+
+  </main>
+
+  <!-- ============================================================
+       공통 푸터 · 기능11: SNS 바로가기
+       ============================================================ -->
+  <footer id="site-footer">
+    <div class="container">
+      <nav id="sns-links" aria-label="SNS 채널">
+        <ul>
+          <li><a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer" aria-label="인스타그램">Instagram</a></li>
+          <li><a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer" aria-label="유튜브">YouTube</a></li>
+          <li><a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" aria-label="페이스북">Facebook</a></li>
+        </ul>
+      </nav>
+      <p data-i18n="footer">© 2026 컬처핏 (CultureFit). MVP 프로토타입.</p>
+    </div>
+  </footer>
+
+  <!-- 배경음악 (기본 재생, 헤더의 음악 토글로 끄기/켜기) -->
+  <audio id="bg-audio" src="mediafiles/cosmic.mp3" loop preload="auto"></audio>
+
+  <!-- 스크립트: 데이터 → 로직 순서로 로드 -->
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

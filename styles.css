@@ -191,6 +191,21 @@ img { max-width: 100%; height: auto; display: block; }
 #music-toggle { display: inline-flex; align-items: center; justify-content: center; padding: 7px 9px; }
 #music-toggle svg { display: block; }
 
+/* 상단바 취향 검색 행 — 히어로에서 이동한 검색 바 + 취향 태그 */
+.header-search-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--sp-sm) var(--sp-lg);
+  padding-bottom: var(--sp-md);
+}
+.header-search-row .search-bar {
+  flex: 1 1 320px;
+  max-width: 640px;
+  margin: 0;
+}
+.header-search-row .taste-tags { margin-bottom: 0; }
+
 /* ============================================================
    본문 공통
    ============================================================ */
@@ -770,12 +785,21 @@ button:disabled {
 #site-footer p { color: var(--muted); margin: var(--sp-base) 0 0; }
 
 #sns-links { margin-bottom: var(--sp-base); }
-#sns-links ul { display: flex; gap: var(--sp-lg); }
+#sns-links ul { display: flex; gap: var(--sp-lg); align-items: center; }
 #sns-links a {
-  font-size: 13px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.02em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  color: var(--ink);
+  transition: opacity 0.15s ease;
+}
+#sns-links a:hover { opacity: 0.55; }
+#sns-links svg {
+  width: 22px;
+  height: 22px;
+  display: block;
 }
 
 /* ============================================================

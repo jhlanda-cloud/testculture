@@ -380,6 +380,7 @@
   function renderPurchase(ev) {
     var row = $("#purchase-row");
     var note = $("#purchase-link .note");
+    if (!row || !note) return; // 예매 UI가 없는 페이지(현재 index는 detail-head 안에서 처리)
     if (!ev.purchase || ev.purchase.length === 0) {
       note.textContent = t("purchaseFree");
       row.innerHTML = "";
@@ -418,11 +419,13 @@
   function renderTrends() {
     $("#trend-list").innerHTML = D.trends.map(function (tr) {
       var l = tr.loc[state.lang] || tr.loc.ko;
+      // 상세페이지 = 원문 기사(외부 링크), 새 창으로 열기
+      var linkAttr = 'href="' + tr.url + '" target="_blank" rel="noopener noreferrer"';
       return (
         '<article class="editorial-tile">' +
-          '<a class="thumb" href="#"><img src="' + tr.image + '" alt="' + esc(l.title) + '" /></a>' +
+          '<a class="thumb" ' + linkAttr + '><img src="' + tr.image + '" alt="' + esc(l.title) + '" /></a>' +
           '<span class="tile-genre">' + esc(l.eyebrow) + "</span>" +
-          '<h3 class="title">' + esc(l.title) + "</h3>" +
+          '<h3 class="title"><a ' + linkAttr + ">" + esc(l.title) + "</a></h3>" +
           '<p class="desc">' + esc(l.desc) + "</p>" +
         "</article>"
       );

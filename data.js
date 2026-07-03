@@ -29,7 +29,7 @@
       dateEnd: "2026-08-31",
       dateDisplay: "2026.06.10 – 08.31",
       cardImage: "image/bangheaja1.jpg",
-      images: ["image/bangheaja1.jpg", "image/bangheaja2.jpeg", "image/bangheaja3.jpeg", "image/bangheaja5.jpg"],
+      images: ["image/bangheaja5.jpg", "image/bangheaja1.jpg", "image/bangheaja2.jpeg", "image/bangheaja3.jpeg"],
       coords: [37.6106, 126.972],
       purchase: [
         { site: "interpark", url: "https://ticket.interpark.com" },
@@ -88,7 +88,7 @@
       dateEnd: "2026-09-15",
       dateDisplay: "2026.05.20 – 09.15",
       cardImage: "image/shinmikyung1.jpg",
-      images: ["image/shinmikyung3.jpg", "image/shinmikyung1.jpg", "image/shinmikyung4.jpg", "image/shinmikyung5.jpg"],
+      images: ["image/shinmikyung3.jpg", "image/shinmikyung1.jpg", "image/shinmikyung4.jpg", "image/shinmikyung2.jpg"],
       coords: [37.5296, 126.9648],
       purchase: [
         { site: "interpark", url: "https://ticket.interpark.com" },
@@ -152,8 +152,8 @@
       dateStart: "2026-06-01",
       dateEnd: "2026-07-20",
       dateDisplay: "2026.06.01 – 07.20",
-      cardImage: "image/ohbyungwook1.jpg",
-      images: ["image/ohbyungwook1.jpg"],
+      cardImage: "image/ohbyungwook2.jpg",
+      images: ["image/ohbyungwook2.jpg"],
       coords: [37.792, 126.696],
       purchase: [],
       translation: { ko: "source", en: "ok", zh: "ok", ja: "ok" },
@@ -210,7 +210,7 @@
       dateEnd: "2026-07-06",
       dateDisplay: "2026.06.25 – 07.06",
       cardImage: "image/popupstore1.jpg",
-      images: ["image/popupstore1.jpg", "image/popupstore4.jpg", "image/popupstore2.jpg", "image/popupstore3.jpg"],
+      images: ["image/popupstore5.jpg", "image/popupstore1.jpg", "image/popupstore4.jpg", "image/popupstore2.jpg"],
       coords: [37.5445, 127.056],
       purchase: [],
       translation: { ko: "source", en: "ok", zh: "ok", ja: "ok" },
@@ -265,8 +265,8 @@
       dateStart: "2026-07-12",
       dateEnd: "2026-07-12",
       dateDisplay: "2026.07.12 20:00",
-      cardImage: "image/silentdisco1.jpg",
-      images: ["image/silentdisco1.jpg"],
+      cardImage: "image/silentdisco2.jpg",
+      images: ["image/silentdisco2.jpg"],
       coords: [37.5343, 126.9946],
       purchase: [
         { site: "interpark", url: "https://ticket.interpark.com" },
@@ -315,66 +315,39 @@
     }
   ];
 
-  /* ---------- 트렌드 리포트 (기능6) ---------- */
+  /* ---------- 트렌드 리포트 (기능6) ----------
+     각 항목의 url = data 폴더의 자체 상세페이지. 카드 클릭 시 새 창(target=_blank)으로 열림. */
   var TRENDS = [
     {
-      image: "image/bangheaja4.jpeg",
+      image: "image/popupstore2.jpg",
+      url: "data/popup-marketing-trend.html",
       loc: {
         ko: {
-          eyebrow: "리포트 · 2026 Q3", title: "2026 글로벌 아트 트렌드",
-          desc: "몰입형 전시와 감각의 확장 — 올해 세계 미술관이 주목한 다섯 가지 흐름.",
-          intro: "2026년 세계 미술관과 갤러리는 ‘보는 전시’에서 ‘겪는 전시’로 빠르게 이동하고 있습니다. 올해 컬처핏이 주목한 다섯 가지 흐름을 정리했습니다.",
-          sections: [
-            { h: "1. 몰입형·다감각 전시", p: "프로젝션과 사운드스케이프를 넘어 후각·촉각까지 동원한 다감각 전시가 표준이 되고 있습니다. 관람객은 작품을 ‘관찰’하기보다 ‘통과’합니다." },
-            { h: "2. 조용한 회화의 귀환", p: "스펙터클의 반작용으로, 빛과 여백을 다룬 명상적 회화가 다시 주목받습니다. 방혜자·오병욱의 작업이 대표적입니다." },
-            { h: "3. 지속가능한 재료 실험", p: "비누·종이·흙처럼 사라지는 재료로 영속성에 질문을 던지는 작업이 늘고 있습니다." },
-            { h: "4. 로컬 아트 투어리즘", p: "미술관 단일 방문에서, 동선 기반의 지역 문화 경험(카페·서점·공연)으로 확장됩니다." },
-            { h: "5. 다국어·접근성", p: "해외 관람객을 위한 4개 언어 지원과 배리어프리 동선이 관람 만족도의 핵심 지표로 자리잡았습니다." }
-          ]
+          eyebrow: "글로벌 트렌드 리포트", title: "임시가 전략이 될 때: 글로벌 팝업 마케팅 트렌드",
+          desc: "디지털 광고비는 오르고, 화면은 예전만큼 사람을 붙잡지 못한다. 그 빈자리를 채우는 오프라인 ‘팝업’ — 임시 매장이 영구 전략이 되는 이유를 짚습니다."
         },
         en: {
-          eyebrow: "Report · 2026 Q3", title: "2026 Global Art Trends",
-          desc: "Immersive exhibitions and the expansion of the senses — five currents museums watched this year.",
-          intro: "In 2026, museums are shifting fast from ‘exhibitions to view’ to ‘exhibitions to experience’. Here are five currents CultureFit tracked this year.",
-          sections: [
-            { h: "1. Immersive, multi-sensory shows", p: "Beyond projection and soundscapes, shows now enlist smell and touch. Visitors pass through works rather than merely observe them." },
-            { h: "2. The return of quiet painting", p: "As a reaction to spectacle, meditative painting of light and emptiness draws attention again." },
-            { h: "3. Sustainable material experiments", p: "Works in soap, paper and clay question permanence through vanishing materials." },
-            { h: "4. Local art tourism", p: "From single museum visits to route-based local culture — cafés, bookshops, performances." },
-            { h: "5. Multilingual & accessibility", p: "Four-language support and barrier-free routes are now core satisfaction metrics." }
-          ]
+          eyebrow: "Global Trend Report", title: "When Temporary Becomes Strategy: The Global Pop-up Marketing Trend",
+          desc: "Digital ad costs keep rising while screens hold attention less than ever. Offline pop-ups are filling the gap — why temporary stores are becoming a permanent strategy."
         },
-        zh: { eyebrow: "报告 · 2026 Q3", title: "2026 全球艺术趋势", desc: "沉浸式展览与感官的扩张——今年全球美术馆关注的五大潮流。" },
-        ja: { eyebrow: "レポート · 2026 Q3", title: "2026 グローバルアートトレンド", desc: "没入型展示と感覚の拡張——今年世界の美術館が注目した5つの潮流。" }
+        zh: { eyebrow: "全球趋势报告", title: "当临时成为战略：全球快闪营销趋势", desc: "数字广告成本上涨，屏幕留不住人——填补空缺的正是线下“快闪店”。临时店铺为何成为永久战略。" },
+        ja: { eyebrow: "グローバルトレンドレポート", title: "臨時が戦略になるとき：グローバルポップアップマーケティングトレンド", desc: "デジタル広告費は上がり、画面はかつてほど人を惹きつけない。その空白を埋めるオフラインの「ポップアップ」——臨時店舗が恒久戦略になる理由。" }
       }
     },
     {
-      image: "image/popupstore2.jpg",
+      image: "image/cafe1.jpg",
+      url: "data/reading-party-trend.html",
       loc: {
         ko: {
-          eyebrow: "리포트 · 2026 Q3", title: "브랜드 팝업, 체험이 되다",
-          desc: "사고 파는 공간에서 머무는 공간으로 — 리테일 팝업의 문화화 전략.",
-          intro: "리테일 팝업은 더 이상 ‘사고 파는 공간’이 아닙니다. 머무르고, 경험하고, 공유하는 문화 공간으로 진화하고 있습니다.",
-          sections: [
-            { h: "체류 시간이 곧 성과", p: "전환율보다 체류 시간과 재방문이 핵심 지표가 되었습니다. 포토존·체험 부스가 매대를 대체합니다." },
-            { h: "브랜드의 미술관화", p: "브랜드가 아카이브와 설치미술을 도입해 팝업을 하나의 전시처럼 기획합니다." },
-            { h: "동네와의 연결", p: "팝업이 주변 카페·로컬 상점과 연계해 ‘동네 코스’의 일부가 됩니다." },
-            { h: "측정 가능한 경험", p: "방문·리뷰·SNS 공유 데이터를 통합해 경험의 효과를 정량화합니다." }
-          ]
+          eyebrow: "글로벌 트렌드 리포트", title: "침묵의 사교술: 글로벌 리딩파티 트렌드",
+          desc: "말을 걸지 않는 모임이 오히려 사람을 끌어모은다 — 스마트폰 대신 책을 손에 쥐게 만드는 조용한 반란, 전 세계로 확산 중인 ‘리딩파티’를 들여다봅니다."
         },
         en: {
-          eyebrow: "Report · 2026 Q3", title: "Brand Pop-ups as Experience",
-          desc: "From places to buy to places to stay — the culturalization of retail pop-ups.",
-          intro: "Retail pop-ups are no longer places to buy and sell. They are evolving into cultural spaces to stay, experience and share.",
-          sections: [
-            { h: "Dwell time is the KPI", p: "Dwell time and revisits matter more than conversion. Photo zones and experience booths replace shelves." },
-            { h: "Brands as museums", p: "Brands adopt archives and installation art, curating pop-ups like exhibitions." },
-            { h: "Tied to the neighborhood", p: "Pop-ups link with nearby cafés and local shops, becoming part of a ‘neighborhood course’." },
-            { h: "Measurable experience", p: "Visit, review and social-share data are combined to quantify the impact of experience." }
-          ]
+          eyebrow: "Global Trend Report", title: "The Social Art of Silence: The Global Reading Party Trend",
+          desc: "Gatherings where no one talks are drawing crowds — a quiet rebellion that puts books in hands instead of phones. Inside the reading-party trend spreading worldwide."
         },
-        zh: { eyebrow: "报告 · 2026 Q3", title: "品牌快闪，成为体验", desc: "从买卖空间到停留空间——零售快闪的文化化策略。" },
-        ja: { eyebrow: "レポート · 2026 Q3", title: "ブランドポップアップ、体験になる", desc: "売買の場から滞在の場へ——リテールポップアップの文化化戦略。" }
+        zh: { eyebrow: "全球趋势报告", title: "沉默的社交术：全球阅读派对趋势", desc: "不说话的聚会反而吸引人——让人放下手机拿起书的安静反叛，正在全球扩散的“阅读派对”。" },
+        ja: { eyebrow: "グローバルトレンドレポート", title: "沈黙の社交術：グローバルリーディングパーティートレンド", desc: "話しかけない集まりがむしろ人を集める——スマホの代わりに本を手に取らせる静かな反乱、世界に広がる「リーディングパーティー」。" }
       }
     }
   ];

@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>침묵의 사교술: 글로벌 리딩파티 트렌드</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,600;9..144,700&family=Noto+Serif+KR:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F1EBDE;
+    --paper-dark:#E4DBC8;
+    --ink:#1F2A2E;
+    --moss:#4B5D46;
+    --moss-deep:#33422F;
+    --rust:#9B4234;
+    --gray:#7C7568;
+    --card:#FAF6EC;
+    --rule:#C9BFA8;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Noto Serif KR', serif;
+    line-height:1.75;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:880px;margin:0 auto;padding:0 28px 90px;}
+
+  /* Masthead */
+  .masthead{
+    border-bottom:3px double var(--ink);
+    padding:22px 0 14px;
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:var(--gray);
+  }
+  .masthead span.hi{color:var(--rust);}
+
+  /* Hero */
+  .eyebrow{
+    margin-top:38px;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    color:var(--moss-deep);
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .eyebrow::before{content:"";width:26px;height:1px;background:var(--rust);display:inline-block;}
+
+  h1.headline{
+    font-family:'Fraunces',serif;
+    font-optical-sizing:auto;
+    font-weight:600;
+    font-size:clamp(34px,5.6vw,58px);
+    line-height:1.08;
+    letter-spacing:-0.01em;
+    margin:16px 0 22px;
+    color:var(--ink);
+  }
+  .standfirst{
+    font-size:19px;
+    color:#3A342C;
+    max-width:640px;
+    margin-bottom:8px;
+  }
+  .byline{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    color:var(--gray);
+    margin-top:22px;
+    padding-top:14px;
+    border-top:1px solid var(--rule);
+  }
+
+  /* 결론 카드 - 도서관 대출카드 모티프 */
+  .due-card{
+    background:var(--card);
+    border:1px solid var(--rule);
+    box-shadow:5px 5px 0 var(--paper-dark);
+    margin:44px 0 50px;
+    padding:26px 28px 22px;
+    position:relative;
+  }
+  .due-card::before{
+    content:"결론부터";
+    position:absolute;
+    top:-13px;
+    left:24px;
+    background:var(--rust);
+    color:var(--paper);
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px;
+    letter-spacing:0.1em;
+    padding:4px 10px;
+  }
+  .due-card p{margin:0 0 0;font-size:17px;}
+  .due-card .stat-row{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+    margin-top:22px;
+    padding-top:18px;
+    border-top:1px dashed var(--rule);
+  }
+  .stat{font-family:'IBM Plex Mono',monospace;}
+  .stat .num{
+    font-family:'Fraunces',serif;
+    font-size:26px;
+    font-weight:600;
+    color:var(--moss-deep);
+    display:block;
+  }
+  .stat .lab{font-size:11.5px;color:var(--gray);line-height:1.5;display:block;margin-top:4px;}
+
+  /* Section */
+  section{margin-top:56px;}
+  h2.sec-title{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:28px;
+    color:var(--moss-deep);
+    border-left:4px solid var(--rust);
+    padding-left:14px;
+    margin-bottom:20px;
+  }
+  p{font-size:16.5px;}
+  .analogy{
+    background:transparent;
+    border-left:2px solid var(--moss);
+    margin:24px 0;
+    padding:6px 0 6px 20px;
+    font-style:italic;
+    color:var(--moss-deep);
+    font-size:16.5px;
+  }
+  .analogy b{font-style:normal;}
+
+  /* Table */
+  table{
+    width:100%;
+    border-collapse:collapse;
+    margin:18px 0 8px;
+    font-size:14.5px;
+    background:var(--card);
+  }
+  caption{
+    text-align:left;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11.5px;
+    color:var(--gray);
+    margin-bottom:8px;
+    letter-spacing:0.02em;
+  }
+  th,td{
+    border:1px solid var(--rule);
+    padding:12px 14px;
+    text-align:left;
+    vertical-align:top;
+  }
+  th{
+    background:var(--moss-deep);
+    color:var(--paper);
+    font-family:'IBM Plex Mono',monospace;
+    font-weight:500;
+    font-size:12px;
+    letter-spacing:0.04em;
+  }
+  td.rowhead{
+    font-family:'IBM Plex Mono',monospace;
+    font-weight:500;
+    font-size:12.5px;
+    color:var(--rust);
+    white-space:nowrap;
+  }
+  .criteria-note{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    color:var(--gray);
+    margin-top:6px;
+  }
+
+  /* Quote */
+  blockquote{
+    margin:28px 0;
+    padding:4px 0 4px 24px;
+    border-left:3px solid var(--rust);
+    font-family:'Fraunces',serif;
+    font-size:20px;
+    font-weight:500;
+    line-height:1.5;
+    color:var(--ink);
+  }
+  blockquote cite{
+    display:block;
+    margin-top:10px;
+    font-family:'IBM Plex Mono',monospace;
+    font-style:normal;
+    font-size:12px;
+    color:var(--gray);
+  }
+
+  /* 데이터 리스트 */
+  .data-list{list-style:none;padding:0;margin:20px 0;}
+  .data-list li{
+    display:grid;
+    grid-template-columns:80px 1fr;
+    gap:16px;
+    padding:14px 0;
+    border-bottom:1px solid var(--rule);
+    align-items:start;
+  }
+  .data-list .year{
+    font-family:'IBM Plex Mono',monospace;
+    font-weight:500;
+    color:var(--moss-deep);
+    font-size:14px;
+  }
+  .data-list p{margin:0;font-size:15.5px;}
+
+  /* 체크리스트 */
+  .checklist{margin:20px 0;padding:0;list-style:none;}
+  .checklist li{
+    position:relative;
+    padding:10px 0 10px 30px;
+    font-size:16px;
+    border-bottom:1px dotted var(--rule);
+  }
+  .checklist li::before{
+    content:"◆";
+    position:absolute;
+    left:0;
+    top:10px;
+    color:var(--rust);
+    font-size:11px;
+  }
+
+  footer{
+    margin-top:64px;
+    padding-top:20px;
+    border-top:3px double var(--ink);
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11.5px;
+    color:var(--gray);
+    line-height:1.9;
+  }
+  footer a{color:var(--moss-deep);}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="masthead">
+    <span>Global Culture Desk</span>
+    <span><span class="hi">No. 26</span> · Wellness & Reading</span>
+  </div>
+
+  <div class="eyebrow">Trend Report</div>
+  <h1 class="headline">침묵 속에서<br>함께 읽는다는 것</h1>
+  <p class="standfirst">
+    말을 걸지 않는 모임이 오히려 사람을 끌어모으고 있다. 전 세계에서 확산 중인
+    '리딩파티'는 스마트폰 대신 책을 손에 쥐게 만드는 조용한 반란이다.
+  </p>
+  <div class="byline">참고 · CNN, "Silent reading clubs are giving like-minded bookworms a brain boost" (2026.6.6, Sneha Dhandapani)</div>
+
+  <div class="due-card">
+    <p>
+      <b>결론:</b> 취미 독서는 지난 20년간 꾸준히 줄어들었지만, 최근 몇 년 새 '사일런트 북클럽'
+      '리딩 리듬스' 같은 오프라인 리딩파티와 온라인의 '북톡(BookTok)' 문화가 그 흐름을 되돌리고 있다.
+      핵심은 콘텐츠가 아니라 <b>구조화된 시간</b>이다 — 정해진 시간에 함께 앉아 읽는 행위 자체가
+      스트레스 완화, 수면 개선, 인지 기능 유지와 연결된다는 것이 연구로 뒷받침된다.
+    </p>
+    <div class="stat-row">
+      <div class="stat"><span class="num">20년</span><span class="lab">미국인의 취미 독서, 20년간 지속 하락 (2025년 연구, 23만 6천여 명 대상 미국 시간사용조사 분석)</span></div>
+      <div class="stat"><span class="num">주 1회+</span><span class="lab">이 빈도로 읽으면 노년기 인지 저하 위험 감소 (2020년 연구)</span></div>
+      <div class="stat"><span class="num">↓ 사망률</span><span class="lab">독서 시간이 많을수록 사망률 낮아지는 상관관계 확인 (2017년 연구)</span></div>
+    </div>
+  </div>
+
+  <section>
+    <h2 class="sec-title">지금, 무슨 일이 벌어지고 있나</h2>
+    <p>
+      애틀랜타의 마거릿 미첼 하우스(‘바람과 함께 사라지다’의 저자가 살던 집을 개조한 박물관)에서 열린
+      한 모임. 대화와 음료로 시작된 자리는 30분 만에 도서관처럼 조용해진다. 다음 한 시간, 사람들은
+      각자 가져온 책의 페이지를 넘긴다. 대화가 목적이지만, 책이 그 <b>아이스브레이커</b> 역할을 한다.
+      이것이 전 세계에 지부를 둔 '사일런트 북클럽(Silent Book Club)'의 방식이다.
+    </p>
+    <p>
+      이런 모임에 참여했던 에이든 퀘일은 "파티라는 말보다는 '어울림'에 가깝다"고 말한다.
+      실제로 이 흐름의 목적은 독서량 자체를 늘리는 것보다, <b>흩어진 일상 속에 읽는 시간을
+      의도적으로 박아 넣는 것</b>에 가깝다.
+    </p>
+    <div class="analogy">
+      리딩파티를 이해하는 가장 쉬운 방법은 <b>‘조용한 헬스장’</b>을 떠올리는 것이다.
+      헬스장에서 사람들은 각자 다른 운동을 하지만, 같은 공간에 있다는 사실만으로
+      동기부여를 얻고 운동을 지속하게 된다. 리딩파티도 마찬가지다 — 각자 다른 책을 읽지만,
+      '함께 읽는 사람들'이 곁에 있다는 감각이 혼자서는 못 지켰을 독서 습관을 지탱해 준다.
+    </div>
+  </section>
+
+  <section>
+    <h2 class="sec-title">3가지 리딩파티 유형 비교</h2>
+    <table>
+      <caption>분류 기준: ① 진행 방식(오프라인/온라인) ② 침묵·스크린 규칙 ③ 모임의 주된 목적</caption>
+      <tr>
+        <th>유형</th>
+        <th>진행 방식</th>
+        <th>규칙</th>
+        <th>주된 목적</th>
+      </tr>
+      <tr>
+        <td class="rowhead">사일런트<br>북클럽</td>
+        <td>오프라인 · 전 세계 지부 운영, 무료/소액 참가</td>
+        <td>대화(30분) → 침묵 독서(1시간) 순서 고정. 책 종류 무관</td>
+        <td>사교 + 독서 시간 확보. "파티보다는 어울림"</td>
+      </tr>
+      <tr>
+        <td class="rowhead">리딩 리듬스</td>
+        <td>오프라인 · 유료 티켓제, 여러 도시에서 개최</td>
+        <td>‘완만한 노스크린 정책’. 책·잡지·오디오북 등 형식 무관("book agnostic")</td>
+        <td>도파민 자극형 콘텐츠의 대안 제시, 커뮤니티 형성</td>
+      </tr>
+      <tr>
+        <td class="rowhead">북톡<br>(BookTok)</td>
+        <td>온라인 · 소셜미디어 기반</td>
+        <td>규칙 없음. 추천·리뷰·챌린지 콘텐츠 중심</td>
+        <td>책 발견과 확산. 다만 알림·타 콘텐츠로 주의 분산 가능성 있음</td>
+      </tr>
+    </table>
+  </section>
+
+  <section>
+    <h2 class="sec-title">왜 두뇌에 좋다고 말하는가</h2>
+    <p>
+      미국도서관협회(ALA) 회장 샘 헬믹은 여가 독서가 "목적에 얽매이지 않은 정보를 흡수하며
+      뇌가 '압축을 풀어내듯' 이완되는 과정"이라고 설명한다. 우울, 스트레스, 수면 불안이 늘어나는
+      지금, 이 연구를 이끈 제시카 본(UCL 통계역학 선임연구원)은 "독서 습관을 만드는 일이
+      그 어느 때보다 중요할 수 있다"고 말한다.
+    </p>
+    <ul class="data-list">
+      <li><span class="year">2017</span><p>더 많은 시간을 독서에 쓸수록 사망률이 낮아지는 경향이 확인됨.</p></li>
+      <li><span class="year">2020</span><p>주 1회 이상 독서하는 노년층은 인지 저하 위험이 낮게 나타남.</p></li>
+      <li><span class="year">2025</span><p>23만 6천여 명의 미국 시간사용조사 데이터 분석 결과, 여가 독서는 지난 20년간 지속 감소 추세.</p></li>
+    </ul>
+    <p>
+      본 연구원은 리딩파티가 새로운 독서 인구를 만든다기보다, "이미 책을 읽던 사람들이
+      다른 장르를 읽거나 더 오래 읽도록" 유도하는 효과에 가깝다고 짚는다. 동시에 헬믹은
+      독서가 "삶의 수업료를 내지 않고도 세상을 경험하게 해주는" 활동이라며, 공감 능력 향상 효과도
+      언급한다.
+    </p>
+  </section>
+
+  <section>
+    <h2 class="sec-title">종이책 vs 화면 속 글자, 뭐가 다를까</h2>
+    <div class="analogy">
+      본 연구원에 따르면 온라인·기기 독서도 '읽기'로 집계되지만, 알림과 다른 콘텐츠에
+      주의를 뺏기기 쉽다. 헬믹은 이를 <b>도파민 사이클</b>로 설명한다. 짠 음식을 자주 먹을수록
+      점점 더 짠맛을 찾게 되는 것처럼, 보상적 자극(알림, 피드 새로고침)에 반복 노출되면
+      뇌는 같은 만족감을 얻기 위해 더 강한 자극을 요구하게 된다. 결과적으로 뇌는 이완되지 못하고
+      계속 자극을 좇는 상태에 머문다.
+    </div>
+    <p>
+      리딩 리듬스 공동창업자 존 리프리에리가 '완만한 노스크린 정책'을 두는 이유도 여기에 있다.
+      그는 리딩파티를 "우리 모두가 걸려 있는 즉각적 만족의 도파민 순환 고리에 대한 해독제"라고
+      표현한다.
+    </p>
+  </section>
+
+  <section>
+    <h2 class="sec-title">시작하는 법</h2>
+    <ul class="checklist">
+      <li>완독 강박을 버릴 것 — 헬믹은 동시에 15~20권을 빌려두고, 맞지 않으면 바로 다음 책으로 넘어간다.</li>
+      <li>분량 목표를 정하지 말 것 — "하루 몇 분 읽기" 같은 할당량은 독서의 즐거움을 오히려 지운다.</li>
+      <li>아이처럼 호기심을 따라갈 것 — 관심 있는 주제(자동차, 요리 등)에서 시작하면 이어가기 쉽다.</li>
+      <li>취침 전이나 이른 아침처럼, 하루와 분리되는 고정 시간을 확보할 것.</li>
+      <li>형식은 자유 — 종이책, 전자책, 오디오북, 잡지 모두 '독서'로 인정된다.</li>
+    </ul>
+    <blockquote>
+      "몇 주만 지나면 자연스럽게 독서 습관이 몸에 붙어 있을 것이다."
+      <cite>— 샘 헬믹, 미국도서관협회 회장</cite>
+    </blockquote>
+  </section>
+
+  <footer>
+    원문: Sneha Dhandapani, “Silent reading clubs are giving like-minded bookworms a brain boost,”
+    CNN, updated Jun 7, 2026.<br>
+    이 페이지는 위 기사에서 인용된 연구(2017, 2020, 2025)와 인터뷰 내용을 재구성한 것이며,
+    수치는 원문에 제시된 범위 내에서만 인용했습니다.
+  </footer>
+
+</div>
+</body>
+</html>
